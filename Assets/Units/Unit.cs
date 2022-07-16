@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -6,6 +7,25 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private int maxHp;
     [SerializeField] private int currentHp;
+    public bool isDead { get; private set; }
 
-    [SerializeField] private Dice[] dices;
+    [SerializeField] public List<Dice> dices;
+
+    public void TakeDamage(int damage)
+    {
+        currentHp -= damage;
+
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+
+
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        // Call animations and whatnot
+    }
 }
