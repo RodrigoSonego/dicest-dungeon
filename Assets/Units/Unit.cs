@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour
 {
     public string unitName;
 
@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private int currentHp;
     public bool isDead { get; private set; }
 
-    [SerializeField] public List<Dice> dices;
+    [SerializeField] public List<Dice> dices; 
 
     public void TakeDamage(int damage)
     {
@@ -20,7 +20,6 @@ public class Unit : MonoBehaviour
             Die();
         }
 
-
     }
 
     private void Die()
@@ -28,4 +27,5 @@ public class Unit : MonoBehaviour
         isDead = true;
         // Call animations and whatnot
     }
+
 }

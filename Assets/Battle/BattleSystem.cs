@@ -18,8 +18,8 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] private Dice debugDiceLmao;
 
-    [SerializeField] private Unit[] enemyUnits;
-    [SerializeField] private Unit playerUnit;
+    [SerializeField] private Enemy[] enemyUnits;
+    [SerializeField] private Player playerUnit;
 
     void Start()
     {
@@ -43,14 +43,14 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack(Dice dice)
     {
-        int damage = dice.Roll();
+        int damage = playerUnit.RollDice(dice);
 
         enemyUnits[0].TakeDamage(damage);
 
         print("player atacou o inimigo e deu " + damage + " de dano");
         print(enemyUnits[0].isDead ? "matou o bicho zé" : "n matou");
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
 
        if(enemyUnits[0].isDead && HaveAllEnemiesDied())
        {
@@ -66,27 +66,29 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator EnemyTurn()
     {
-        print("turno do inimigo");
-
-        int randomIndex = Random.Range(0, enemyUnits[0].dices.Count);
-        int damage = enemyUnits[0].dices[randomIndex].Roll();
-
-        playerUnit.TakeDamage(damage);
-
-        print("atacou o player e deu " + damage + " de dano");
-
-        yield return new WaitForSeconds(2);
-
-        if(playerUnit.isDead)
+        foreach (Enemy enemy in enemyUnits)
         {
-            currentState = BattleState.Lost;
-            EndBattle();
+            print("turno do inimigo " + enemy.name);
+            int damage = enemy.RollDice();
+
+            playerUnit.TakeDamage(damage);
+
+            print("atacou o player e deu " + damage + " de dano");
+
+            yield return new WaitForSeconds(1.5f);
+
+            if(playerUnit.isDead)
+            {
+                currentState = BattleState.Lost;
+                EndBattle();
+
+                yield break;
+            }
+
         }
-        else
-        {
-            currentState = BattleState.PlayerTurn;
-            StartPlayerTurn();
-        }
+        
+        currentState = BattleState.PlayerTurn;
+        StartPlayerTurn();
 
     }
 

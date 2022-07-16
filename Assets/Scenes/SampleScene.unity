@@ -612,8 +612,8 @@ MonoBehaviour:
   currentState: 0
   debugDiceLmao: {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   enemyUnits:
-  - {fileID: 2141761910086934310}
-  playerUnit: {fileID: 7646132346986349414}
+  - {fileID: 2141761910086934312}
+  playerUnit: {fileID: 7646132346986349416}
 --- !u!4 &1334648834
 Transform:
   m_ObjectHideFlags: 0
@@ -821,25 +821,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3909790808756707529, guid: 75430049b6475a2499fc4c0d0084dd9f, type: 3}
-      propertyPath: dices.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3909790808756707529, guid: 75430049b6475a2499fc4c0d0084dd9f, type: 3}
-      propertyPath: dices.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75430049b6475a2499fc4c0d0084dd9f, type: 3}
---- !u!114 &2141761910086934310 stripped
+--- !u!114 &2141761910086934312 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3909790808756707529, guid: 75430049b6475a2499fc4c0d0084dd9f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2141761910086934312, guid: 75430049b6475a2499fc4c0d0084dd9f, type: 3}
   m_PrefabInstance: {fileID: 2141761910086934309}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 278ed2107b8e3f549b1b7d870821166c, type: 3}
+  m_Script: {fileID: 11500000, guid: e7e37999e28b2bd42a08f7c5524d392c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7646132346986349413
@@ -849,14 +841,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3848955485277014554, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
-      propertyPath: dices.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3848955485277014554, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
-      propertyPath: dices.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
     - target: {fileID: 6342146706012846703, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -901,20 +885,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7646132346986349416, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
+      propertyPath: dices.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7646132346986349416, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
+      propertyPath: dices.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
     - target: {fileID: 8254629092461159845, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
---- !u!114 &7646132346986349414 stripped
+--- !u!114 &7646132346986349416 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3848955485277014554, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7646132346986349416, guid: 9eb17564032ab6643997e552bb2a2a45, type: 3}
   m_PrefabInstance: {fileID: 7646132346986349413}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 278ed2107b8e3f549b1b7d870821166c, type: 3}
+  m_Script: {fileID: 11500000, guid: 21ed2d5b2e7041f4990dbbd6d607b1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70108e3ff7c0b2c44a1228c33ef34027, type: 3}
-  m_Name: D6
+  m_Name: D20
   m_EditorClassIdentifier: 
-  diceName: D6
-  maxValue: 6
+  diceName: D20
+  maxValue: 20
   uiSprite: {fileID: 0}
   RolledSprite: {fileID: 0}
