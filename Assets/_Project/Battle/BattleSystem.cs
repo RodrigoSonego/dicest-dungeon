@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private Enemy[] enemyUnits;
     [SerializeField] private Player playerUnit;
 
+    private Enemy selectedEnemy = null;
+
     public static BattleSystem instance { get; private set; }
 
     void Start()
@@ -34,8 +37,11 @@ public class BattleSystem : MonoBehaviour
     {
         currentState = BattleState.Start;
 
+        BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.SetDiceButtons(playerUnit.dices);
         BattleUI.instance.DisableDiceButtons();
+
+        SetEnemyClickListenersIfNeeded();
 
         yield return new WaitForSeconds(2);
 
@@ -43,40 +49,65 @@ public class BattleSystem : MonoBehaviour
         StartPlayerTurn();
     }
 
+    private void SetEnemyClickListenersIfNeeded()
+    {
+        if(enemyUnits.Length > 1)
+        {
+            foreach (var enemy in enemyUnits)
+            {
+                enemy.isSelectable = true;
+                enemy.onEnemyClicked += SelectEnemy;
+            }
+        }
+
+        SelectEnemy(enemyUnits[0]);
+    }
+
     void StartPlayerTurn()
     {
-        print("turno do player");
+        BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.EnableDiceButtons();
     }
 
-    IEnumerator PlayerAttack(Dice dice, Enemy target = null)
+    IEnumerator PlayerAttack(Dice dice)
     {
+        if(enemyUnits.Length > 1 && selectedEnemy == null)
+        {
+            print("no enemy selected");
+            yield break;
+        }
+
         int damage = playerUnit.RollDice(dice);
 
-        Enemy attackTarget = target ?? enemyUnits[0];
+        selectedEnemy.TakeDamage(damage);
 
-        attackTarget.TakeDamage(damage);
-
-        print("player atacou o inimigo com um "+ dice.diceName + " e deu " + damage + " de dano");
-        print(attackTarget.isDead ? "matou o bicho zé" : "n matou");
+        print("player atacou o inimigo" + selectedEnemy.unitName + " com um "+ dice.diceName + " e deu " + damage + " de dano");
+        print(selectedEnemy.isDead ? "matou o bicho zé" : "n matou");
 
         BattleUI.instance.DisableDiceButtons();
         yield return new WaitForSeconds(1.5f);
 
-        if(attackTarget.isDead && HaveAllEnemiesDied())
+        if(selectedEnemy.isDead)
         {
-            currentState = BattleState.Won;
-            EndBattle();
+            if (HaveAllEnemiesDied())
+            {
+                currentState = BattleState.Won;
+                EndBattle();
+                yield break;
+            }
+
+            selectedEnemy.isSelectable = false;
+            SelectNextEnemy();
         } 
-        else
-        {
-            currentState = BattleState.EnemyTurn;
-            StartCoroutine(EnemyTurn());
-        }
+
+        currentState = BattleState.EnemyTurn;
+        StartCoroutine(EnemyTurn());     
     }
 
     private IEnumerator EnemyTurn()
     {
+        BattleUI.instance.OnBattleStateChanged(currentState);
+
         foreach (Enemy enemy in enemyUnits)
         {
             print("turno do inimigo " + enemy.name);
@@ -112,6 +143,27 @@ public class BattleSystem : MonoBehaviour
         else if (currentState == BattleState.Lost)
         {
             print("Congratulations! You're a failure");
+        }
+    }
+
+    public void SelectEnemy(Enemy enemy)
+    {
+        if(selectedEnemy != null)
+        {
+            selectedEnemy.DisableOutline();
+        }
+
+        selectedEnemy = enemy;
+        selectedEnemy.EnableOutline();
+    }
+
+    private void SelectNextEnemy()
+    {
+        foreach (var enemy in enemyUnits)
+        {
+            if (enemy.isDead) { continue; }
+
+            SelectEnemy(enemy);
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class BattleUI : MonoBehaviour
 
     [SerializeField] private RectTransform diceButtonContainer;
     [SerializeField] private DiceButton diceButtonPrefab;
+    [Space]
+    [SerializeField] private TextMeshProUGUI battleStateTitle;
 
     void Start()
     {
@@ -43,9 +46,32 @@ public class BattleUI : MonoBehaviour
         }
     }
 
-    public void OnDiceButtonClicked(Dice dice)
+    public void OnDiceButtonClicked(DiceButton diceButton)
     {
-        BattleSystem.instance.OnDiceClicked(dice);
+        BattleSystem.instance.OnDiceClicked(diceButton.dice);
+        Destroy(diceButton.gameObject);
+    }
+
+    public void OnBattleStateChanged(BattleState state)
+    {
+        switch (state)
+        {
+            case BattleState.Start:
+                battleStateTitle.text = "Betting Start!";
+                break;
+            case BattleState.PlayerTurn:
+                battleStateTitle.text = "Player's Bet";
+                break;
+            case BattleState.EnemyTurn:
+                battleStateTitle.text = "Enemy's Bet";
+                break;
+            case BattleState.Won:
+                break;
+            case BattleState.Lost:
+                break;
+            default:
+                break;
+        }
     }
 
 }

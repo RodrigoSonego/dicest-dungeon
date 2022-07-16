@@ -27,7 +27,7 @@ public class DiceButton : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        BattleUI.instance.OnDiceButtonClicked(dice);
-        Destroy(gameObject);
+        BattleUI.instance.OnDiceButtonClicked(this);
+        button.targetGraphic.color = button.colors.pressedColor; 
     }
 }
