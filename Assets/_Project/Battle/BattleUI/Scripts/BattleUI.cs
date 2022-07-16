@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,10 +12,18 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private DiceButton diceButtonPrefab;
     [Space]
     [SerializeField] private TextMeshProUGUI battleStateTitle;
+    [Space]
+    [SerializeField] private RectTransform turnIndicator;
+    [SerializeField] private Vector2 TurnIndicatorOffset;
+    [Space]
+    [SerializeField] private TextMeshProUGUI damageIndicator;
 
     void Start()
     {
         instance = this;
+
+        turnIndicator.gameObject.SetActive(false);
+        damageIndicator.enabled = false;
     }
 
     public void SetDiceButtons(List<Dice> dices)
@@ -66,12 +75,43 @@ public class BattleUI : MonoBehaviour
                 battleStateTitle.text = "Enemy's Bet";
                 break;
             case BattleState.Won:
+                battleStateTitle.text = "You Won!";
                 break;
             case BattleState.Lost:
+                battleStateTitle.text = "You Lost";
                 break;
             default:
                 break;
         }
+    }
+
+    public void OnAttackerChanged(Vector2 attackerPosition)
+    {
+        Vector2 viewPortAttackerPos = Camera.main.WorldToScreenPoint(attackerPosition);
+
+        turnIndicator.gameObject.SetActive(true);
+        turnIndicator.position = viewPortAttackerPos + TurnIndicatorOffset;
+    }
+
+    public void OnDamageDealt(int damage, Vector2 damagedUnitPosition)
+    {
+        Vector2 viewPortDamagePos = Camera.main.WorldToScreenPoint(damagedUnitPosition);
+
+        turnIndicator.position = viewPortDamagePos + TurnIndicatorOffset;
+
+        StartCoroutine(ShowDamageAtPosition(damage, viewPortDamagePos));
+    }
+
+    IEnumerator ShowDamageAtPosition(int damage, Vector2 position)
+    {
+        damageIndicator.enabled = true;
+
+        damageIndicator.transform.position = position;
+        damageIndicator.text = damage.ToString();
+
+        yield return new WaitForSeconds(1.3f);
+
+        damageIndicator.enabled = false;
     }
 
 }

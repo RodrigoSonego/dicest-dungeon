@@ -28,12 +28,12 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
-        instance = this;
+       instance = this;
 
-        StartCoroutine(StartBattle());
+       //StartCoroutine(StartBattle());
     }
 
-    IEnumerator StartBattle()
+    public IEnumerator StartBattle()
     {
         currentState = BattleState.Start;
 
@@ -67,6 +67,7 @@ public class BattleSystem : MonoBehaviour
     {
         BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.EnableDiceButtons();
+        BattleUI.instance.OnAttackerChanged(playerUnit.transform.position);
     }
 
     IEnumerator PlayerAttack(Dice dice)
@@ -80,6 +81,7 @@ public class BattleSystem : MonoBehaviour
         int damage = playerUnit.RollDice(dice);
 
         selectedEnemy.TakeDamage(damage);
+        BattleUI.instance.OnDamageDealt(damage, selectedEnemy.transform.position);
 
         print("player atacou o inimigo" + selectedEnemy.unitName + " com um "+ dice.diceName + " e deu " + damage + " de dano");
         print(selectedEnemy.isDead ? "matou o bicho zé" : "n matou");
@@ -110,10 +112,14 @@ public class BattleSystem : MonoBehaviour
 
         foreach (Enemy enemy in enemyUnits)
         {
-            print("turno do inimigo " + enemy.name);
+            if(enemy.isDead) { continue; }
+
+            BattleUI.instance.OnAttackerChanged(enemy.transform.position);
+
             int damage = enemy.RollDice();
 
             playerUnit.TakeDamage(damage);
+            BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
 
             print("atacou o player e deu " + damage + " de dano");
 
