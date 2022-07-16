@@ -35,6 +35,7 @@ public class BattleSystem : MonoBehaviour
         currentState = BattleState.Start;
 
         BattleUI.instance.SetDiceButtons(playerUnit.dices);
+        BattleUI.instance.DisableDiceButtons();
 
         yield return new WaitForSeconds(2);
 
@@ -45,29 +46,33 @@ public class BattleSystem : MonoBehaviour
     void StartPlayerTurn()
     {
         print("turno do player");
+        BattleUI.instance.EnableDiceButtons();
     }
 
-    IEnumerator PlayerAttack(Dice dice)
+    IEnumerator PlayerAttack(Dice dice, Enemy target = null)
     {
         int damage = playerUnit.RollDice(dice);
 
-        enemyUnits[0].TakeDamage(damage);
+        Enemy attackTarget = target ?? enemyUnits[0];
+
+        attackTarget.TakeDamage(damage);
 
         print("player atacou o inimigo com um "+ dice.diceName + " e deu " + damage + " de dano");
-        print(enemyUnits[0].isDead ? "matou o bicho zé" : "n matou");
+        print(attackTarget.isDead ? "matou o bicho zé" : "n matou");
 
+        BattleUI.instance.DisableDiceButtons();
         yield return new WaitForSeconds(1.5f);
 
-       if(enemyUnits[0].isDead && HaveAllEnemiesDied())
-       {
+        if(attackTarget.isDead && HaveAllEnemiesDied())
+        {
             currentState = BattleState.Won;
             EndBattle();
-       } 
-       else
-       {
+        } 
+        else
+        {
             currentState = BattleState.EnemyTurn;
             StartCoroutine(EnemyTurn());
-       }
+        }
     }
 
     private IEnumerator EnemyTurn()

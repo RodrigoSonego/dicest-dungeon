@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
@@ -22,8 +23,29 @@ public class BattleUI : MonoBehaviour
         }
     }
 
+    public void EnableDiceButtons()
+    {
+        Button[] buttons = diceButtonContainer.GetComponentsInChildren<Button>();
+
+        foreach (var button in buttons)
+        {
+            button.interactable = true;
+        }
+    }
+
+    public void DisableDiceButtons()
+    {
+        Button[] buttons = diceButtonContainer.GetComponentsInChildren<Button>();
+
+        foreach (var button in buttons)
+        {
+            button.interactable = false;
+        }
+    }
+
     public void OnDiceButtonClicked(Dice dice)
     {
         BattleSystem.instance.OnDiceClicked(dice);
     }
+
 }
