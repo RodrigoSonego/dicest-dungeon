@@ -21,14 +21,20 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private Enemy[] enemyUnits;
     [SerializeField] private Player playerUnit;
 
+    public static BattleSystem instance { get; private set; }
+
     void Start()
     {
+        instance = this;
+
         StartCoroutine(StartBattle());
     }
 
     IEnumerator StartBattle()
     {
         currentState = BattleState.Start;
+
+        BattleUI.instance.SetDiceButtons(playerUnit.dices);
 
         yield return new WaitForSeconds(2);
 
@@ -47,7 +53,7 @@ public class BattleSystem : MonoBehaviour
 
         enemyUnits[0].TakeDamage(damage);
 
-        print("player atacou o inimigo e deu " + damage + " de dano");
+        print("player atacou o inimigo com um "+ dice.diceName + " e deu " + damage + " de dano");
         print(enemyUnits[0].isDead ? "matou o bicho zé" : "n matou");
 
         yield return new WaitForSeconds(1.5f);
@@ -116,10 +122,10 @@ public class BattleSystem : MonoBehaviour
         return areAllDead;
     }
 
-    public void OnDiceClicked()
+    public void OnDiceClicked(Dice dice)
     {
         if(currentState != BattleState.PlayerTurn) { return; }
 
-        StartCoroutine(PlayerAttack(debugDiceLmao));
+        StartCoroutine(PlayerAttack(dice));
     }
 }
