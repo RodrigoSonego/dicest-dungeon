@@ -26,6 +26,7 @@ public class BattleSystem : MonoBehaviour
     private Enemy selectedEnemy = null;
     
     private Dice[] diceReward = null;
+    private List<Dice> lastUsedDices = null;
 
     public static BattleSystem instance { get; private set; }
 
@@ -41,6 +42,8 @@ public class BattleSystem : MonoBehaviour
         currentState = BattleState.Start;
         enemyUnits = enemies;
         this.diceReward = diceReward;
+
+        lastUsedDices = new List<Dice>();
 
         PlayerCamera.instance.willFollow = false;
 
@@ -86,6 +89,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         int damage = playerUnit.RollDice(dice);
+        lastUsedDices.Add(dice);
 
         selectedEnemy.TakeDamage(damage);
         BattleUI.instance.OnDamageDealt(damage, selectedEnemy.transform.position);
@@ -159,7 +163,8 @@ public class BattleSystem : MonoBehaviour
         }
         else if (currentState == BattleState.Lost)
         {
-            
+            BattleUI.instance.HideUI();
+            RestoreUsedDices();
         }
     }
 
@@ -179,12 +184,19 @@ public class BattleSystem : MonoBehaviour
         enemyUnits = null;
     }
 
+    private void RestoreUsedDices()
+    {
+        playerUnit.dices.AddRange(lastUsedDices);
+        lastUsedDices = null;
+    }
+
     IEnumerator ReturnFromBattle()
     {
         yield return new WaitForSeconds(1.5f);
 
         PlayerCamera.instance.willFollow = true;
         playerUnit.EnableCollisionAndMovement();
+        playerUnit.FullyHeal();
     }
 
     public void SelectEnemy(Enemy enemy)
@@ -219,9 +231,6 @@ public class BattleSystem : MonoBehaviour
 
         return areAllDead;
     }
-
-    
-
     public void OnDiceClicked(Dice dice)
     {
         if(currentState != BattleState.PlayerTurn) { return; }
