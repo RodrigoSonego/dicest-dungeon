@@ -135,6 +135,8 @@ MonoBehaviour:
   unitName: Player
   maxHp: 15
   currentHp: 15
+  attackAnimationWindUpTime: 0
+  diceSpawnPosition: {fileID: 0}
   dices:
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
@@ -173,7 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  canMove: 1
 --- !u!61 &7646132346986349420
 BoxCollider2D:
   m_ObjectHideFlags: 0
