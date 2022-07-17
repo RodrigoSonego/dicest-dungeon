@@ -24,6 +24,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private Player playerUnit;
 
     private Enemy selectedEnemy = null;
+    
+    private Dice[] diceReward = null;
 
     public static BattleSystem instance { get; private set; }
 
@@ -34,10 +36,11 @@ public class BattleSystem : MonoBehaviour
        //StartCoroutine(StartBattle());
     }
 
-    public IEnumerator StartBattle(Enemy[] enemies)
+    public IEnumerator StartBattle(Enemy[] enemies, Dice[] diceReward)
     {
         currentState = BattleState.Start;
         enemyUnits = enemies;
+        this.diceReward = diceReward;
 
         PlayerCamera.instance.willFollow = false;
 
@@ -125,8 +128,9 @@ public class BattleSystem : MonoBehaviour
 
             playerUnit.TakeDamage(damage);
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
+            yield return new WaitForSeconds(enemy.attackAnimationWindUpTime);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
 
             if(playerUnit.isDead)
             {
@@ -180,6 +184,7 @@ public class BattleSystem : MonoBehaviour
 
         PlayerCamera.instance.willFollow = true;
         playerUnit.EnableCollisionAndMovement();
+        playerUnit.dices.AddRange(diceReward);
     }
 
     public void SelectEnemy(Enemy enemy)

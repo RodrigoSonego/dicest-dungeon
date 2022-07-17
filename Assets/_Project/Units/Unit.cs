@@ -9,6 +9,8 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private int currentHp;
     public bool isDead { get; private set; }
 
+    public float attackAnimationWindUpTime;
+    public Transform diceSpawnPosition;
     [SerializeField] public List<Dice> dices; 
 
     public void TakeDamage(int damage)

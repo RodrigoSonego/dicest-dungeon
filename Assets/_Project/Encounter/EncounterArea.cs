@@ -16,7 +16,7 @@ public class EncounterArea : MonoBehaviour
         SetupPlayer(player);
 
         var enemies = SpawnAndPositionEnemies();
-        StartCoroutine(BattleSystem.instance.StartBattle(enemies));
+        StartCoroutine(BattleSystem.instance.StartBattle(enemies, encounter.diceReward));
 
         hasTriggered = true;
     }
