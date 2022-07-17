@@ -5,15 +5,15 @@ public abstract class Unit : MonoBehaviour
 {
     public string unitName;
 
-    [SerializeField] private int maxHp;
-    [SerializeField] private int currentHp;
+    [SerializeField] protected int maxHp;
+    [SerializeField] protected int currentHp;
     public bool isDead { get; private set; }
 
     public float attackAnimationWindUpTime;
     public Transform diceSpawnPosition;
     [SerializeField] public List<Dice> dices; 
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         currentHp -= damage;
 

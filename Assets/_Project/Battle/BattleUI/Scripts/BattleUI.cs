@@ -24,17 +24,27 @@ public class BattleUI : MonoBehaviour
         instance = this;
 
         battleStateTitle.transform.position += new Vector3(0, 100, 0);
-        diceButtonContainer.transform.position += new Vector3(0, -100, 0);
+        diceButtonContainer.transform.position += new Vector3(0, -200, 0);
 
         HideUI();
     }
 
     public void SetDiceButtons(List<Dice> dices)
     {
+        ClearDiceButtons();
+
         foreach (Dice dice in dices)
         {
             DiceButton button = Instantiate(diceButtonPrefab, diceButtonContainer);
             button.UpdateWithDice(dice);
+        }
+    }
+
+    public void ClearDiceButtons()
+    {
+        foreach (var button in diceButtonContainer.GetComponentsInChildren<Button>())
+        {
+            Destroy(button.gameObject);
         }
     }
 
@@ -144,13 +154,13 @@ public class BattleUI : MonoBehaviour
         DisableDiceButtons();
 
         SlideToOffset(battleStateTitle.transform, new Vector3(0,-100,0));
-        SlideToOffset(diceButtonContainer.transform, new Vector3(0, 100, 0));
+        SlideToOffset(diceButtonContainer.transform, new Vector3(0, 200, 0));
     }
 
     internal void OnBattleEnd()
     {
         SlideToOffset(battleStateTitle.transform, new Vector3(0, 100, 0));
-        SlideToOffset(diceButtonContainer.transform, new Vector3(0, -100, 0));
+        SlideToOffset(diceButtonContainer.transform, new Vector3(0, -200, 0));
         FadeOut(turnIndicator.GetComponent<Graphic>());
     }
 

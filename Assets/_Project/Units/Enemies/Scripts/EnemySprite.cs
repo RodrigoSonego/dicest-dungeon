@@ -30,6 +30,5 @@ public class EnemySprite : MonoBehaviour
     public void FadeOut()
     {
         StartCoroutine(LerpMovement.LerpOpacity(spriteRenderer, 0, 1.5f));
-        Destroy(gameObject, 1.5f);
     }
 }

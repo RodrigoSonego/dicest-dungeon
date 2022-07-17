@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Enemy : Unit, IPointerClickHandler
 {
@@ -10,9 +11,20 @@ public class Enemy : Unit, IPointerClickHandler
 
     public Action<Enemy> onEnemyClicked;
 
+    [SerializeField] private Slider healthBar;
+
     void OnEnable()
     {
         sprite = GetComponentInChildren<EnemySprite>();
+        healthBar.maxValue = maxHp;
+        healthBar.value = maxHp;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        healthBar.value = currentHp;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -45,5 +57,6 @@ public class Enemy : Unit, IPointerClickHandler
     public void FadeOut()
     {
         sprite.FadeOut();
+        Destroy(gameObject, 1.5f);
     }
 }

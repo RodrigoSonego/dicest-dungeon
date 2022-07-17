@@ -29,4 +29,9 @@ public class Player : Unit
     {
         movementController.EnableCollisionAndMovement();
     }
+
+    public void FullyHeal()
+    {
+        currentHp = maxHp;
+    }
 }
