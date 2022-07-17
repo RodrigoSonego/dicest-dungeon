@@ -5,7 +5,10 @@ public abstract class Unit : MonoBehaviour
 {
     public string unitName;
 
+    [SerializeField] public int MaxHp { get { return maxHp; } }
     [SerializeField] protected int maxHp;
+
+    [SerializeField] public int CurrentHp { get { return currentHp; } }
     [SerializeField] protected int currentHp;
     public bool isDead { get; private set; }
 

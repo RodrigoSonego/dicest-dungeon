@@ -132,6 +132,8 @@ public class BattleSystem : MonoBehaviour
 
             playerUnit.TakeDamage(damage);
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
+            BattleUI.instance.SetPlayerHealthBarValue(playerUnit.CurrentHp);
+
             yield return new WaitForSeconds(enemy.attackAnimationWindUpTime);
 
             yield return new WaitForSeconds(2f);
@@ -176,11 +178,6 @@ public class BattleSystem : MonoBehaviour
 
     private void ClearEnemies()
     {
-        foreach (var enemy in enemyUnits)
-        {
-            enemy.FadeOut();
-        }
-
         enemyUnits = null;
     }
 

@@ -9,6 +9,9 @@ public class BattleUI : MonoBehaviour
 {
     public static BattleUI instance { get; private set; }
 
+    [SerializeField] private RectTransform lowerPanel;
+    [SerializeField] private Slider playerHealthBar;
+    [Space]
     [SerializeField] private RectTransform diceButtonContainer;
     [SerializeField] private DiceButton diceButtonPrefab;
     [Space]
@@ -24,7 +27,10 @@ public class BattleUI : MonoBehaviour
         instance = this;
 
         battleStateTitle.transform.position += new Vector3(0, 100, 0);
-        diceButtonContainer.transform.position += new Vector3(0, -200, 0);
+        lowerPanel.transform.position += new Vector3(0, -200, 0);
+        
+        playerHealthBar.maxValue = Player.instance.MaxHp;
+        playerHealthBar.value = Player.instance.MaxHp;
 
         HideUI();
     }
@@ -72,6 +78,11 @@ public class BattleUI : MonoBehaviour
     {
         BattleSystem.instance.OnDiceClicked(diceButton.dice);
         Destroy(diceButton.gameObject);
+    }
+
+    public void SetPlayerHealthBarValue(int hp)
+    {
+        playerHealthBar.value = hp;
     }
 
     public void OnBattleStateChanged(BattleState state)
@@ -154,13 +165,13 @@ public class BattleUI : MonoBehaviour
         DisableDiceButtons();
 
         SlideToOffset(battleStateTitle.transform, new Vector3(0,-100,0));
-        SlideToOffset(diceButtonContainer.transform, new Vector3(0, 200, 0));
+        SlideToOffset(lowerPanel.transform, new Vector3(0, 200, 0));
     }
 
     internal void OnBattleEnd()
     {
         SlideToOffset(battleStateTitle.transform, new Vector3(0, 100, 0));
-        SlideToOffset(diceButtonContainer.transform, new Vector3(0, -200, 0));
+        SlideToOffset(lowerPanel.transform, new Vector3(0, -200, 0));
         FadeOut(turnIndicator.GetComponent<Graphic>());
     }
 

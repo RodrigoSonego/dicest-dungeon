@@ -16,8 +16,8 @@ public class Enemy : Unit, IPointerClickHandler
     void OnEnable()
     {
         sprite = GetComponentInChildren<EnemySprite>();
-        healthBar.maxValue = maxHp;
-        healthBar.value = maxHp;
+        healthBar.maxValue = MaxHp;
+        healthBar.value = MaxHp;
     }
 
     public override void TakeDamage(int damage)
@@ -25,6 +25,11 @@ public class Enemy : Unit, IPointerClickHandler
         base.TakeDamage(damage);
 
         healthBar.value = currentHp;
+        
+        if (isDead)
+        {
+            FadeOut();
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -57,6 +62,18 @@ public class Enemy : Unit, IPointerClickHandler
     public void FadeOut()
     {
         sprite.FadeOut();
-        Destroy(gameObject, 1.5f);
+        FadeHealthBar();
+
+        sprite.DisableOutline();
+        Destroy(gameObject, 2f);
+    }
+
+
+    private void FadeHealthBar()
+    {
+        foreach (var graphic in healthBar.GetComponentsInChildren<Graphic>())
+        {
+            StartCoroutine(LerpMovement.LerpOpacity(graphic, 0, 1.5f));
+        }
     }
 }

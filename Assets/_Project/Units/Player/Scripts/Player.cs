@@ -32,6 +32,6 @@ public class Player : Unit
 
     public void FullyHeal()
     {
-        currentHp = maxHp;
+        currentHp = MaxHp;
     }
 }

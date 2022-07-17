@@ -680,8 +680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 7646132346986349417}
-  smoothSpeed: 60
-  offset: {x: 2, y: 0, z: -1}
+  smoothSpeed: 70
+  offset: {x: 1, y: 0, z: -1}
   willFollow: 1
 --- !u!1001 &557288222
 PrefabInstance:
@@ -1350,9 +1350,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8111885252210675847, guid: 835600b50ecf48745bcee6968a4467d9, type: 3}
+      propertyPath: m_Size.y
+      value: 3.4863758
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111885252210675847, guid: 835600b50ecf48745bcee6968a4467d9, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.2431879
+      objectReference: {fileID: 0}
     - target: {fileID: 8111885252210675849, guid: 835600b50ecf48745bcee6968a4467d9, type: 3}
       propertyPath: m_Name
       value: EncounterArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111885254261817599, guid: 835600b50ecf48745bcee6968a4467d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.184
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 835600b50ecf48745bcee6968a4467d9, type: 3}
