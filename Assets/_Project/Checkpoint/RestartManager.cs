@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RestartManager : MonoBehaviour
@@ -14,8 +15,9 @@ public class RestartManager : MonoBehaviour
     {
         instance = this;
 
+        gameOverUI.gameObject.SetActive(true);
         HideGameOverUI();
-        restartButton.onClick.AddListener(RestartFromCheckpoint);
+        restartButton.onClick.AddListener(RestartScene);
     }
 
     public void OnCheckpointPassed(Checkpoint checkpoint)
@@ -69,5 +71,11 @@ public class RestartManager : MonoBehaviour
         FadeOutGameOverUI();
         Player.instance.EnableCollisionAndMovement();
         PlayerCamera.instance.willFollow = true;
+        Player.instance.FullyHeal();
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
