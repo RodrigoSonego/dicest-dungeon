@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,5 +25,11 @@ public class EnemySprite : MonoBehaviour
     public void EnableOutline()
     {
         spriteRenderer.material.SetFloat(outlineEnableProperty, 1);
+    }
+
+    public void FadeOut()
+    {
+        StartCoroutine(LerpMovement.LerpOpacity(spriteRenderer, 0, 1.5f));
+        Destroy(gameObject, 1.5f);
     }
 }

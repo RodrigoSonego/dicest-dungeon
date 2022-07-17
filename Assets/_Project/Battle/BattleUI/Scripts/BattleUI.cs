@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -88,17 +89,15 @@ public class BattleUI : MonoBehaviour
     {
         Vector2 viewPortAttackerPos = Camera.main.WorldToScreenPoint(attackerPosition);
 
-        turnIndicator.gameObject.SetActive(true);
         Vector2 newIndicatorPos = viewPortAttackerPos + TurnIndicatorOffset;
 
+        turnIndicator.gameObject.SetActive(true);
         turnIndicator.transform.position = newIndicatorPos;
     }
 
     public void OnDamageDealt(int damage, Vector2 damagedUnitPosition)
     {
         Vector2 viewPortDamagePos = Camera.main.WorldToScreenPoint(damagedUnitPosition);
-
-        turnIndicator.position = viewPortDamagePos + TurnIndicatorOffset;
 
         StartCoroutine(ShowDamageAtPosition(damage, viewPortDamagePos));
     }
@@ -142,10 +141,29 @@ public class BattleUI : MonoBehaviour
         SlideFromOffset(battleStateTitle.transform, new Vector3(0,100,0));
     }
 
+    internal void OnBattleEnd()
+    {
+        SlideToOffset(battleStateTitle.transform, new Vector3(0, 100, 0));
+        SlideToOffset(diceButtonContainer.transform, new Vector3(0, -100, 0));
+        FadeOut(turnIndicator.GetComponent<Graphic>());
+    }
+
     public void SlideFromOffset(Transform current, Vector3 offset)
     {
         Vector3 initialPos = current.position;
         battleStateTitle.transform.position += offset;
-        StartCoroutine(LerpMovement.LerpToPosition(battleStateTitle.transform, initialPos, 2f));
+        StartCoroutine(LerpMovement.LerpToPosition(current, initialPos, 2f));
+    }
+
+    public void SlideToOffset(Transform current, Vector3 offset)
+    {
+        Vector3 initialPos = current.position;
+        Vector3 offsetPos = initialPos + offset;
+        StartCoroutine(LerpMovement.LerpToPosition(current, offsetPos, 2f));
+    }
+
+    private void FadeOut(Graphic graphic)
+    {
+        StartCoroutine(LerpMovement.LerpOpacity(graphic, 0, 1.5f));
     }
 }

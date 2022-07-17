@@ -36,4 +36,21 @@ public class LerpMovement : MonoBehaviour
 
         yield return null;
     }
+
+    public static IEnumerator LerpOpacity(SpriteRenderer spriteRenderer, float opacity, float time)
+    {
+        float elapsedTime = 0;
+        var currentColor = spriteRenderer.color;
+        var targetColor = new Color(currentColor.r, currentColor.g, currentColor.b, opacity);
+
+        while (elapsedTime < time)
+        {
+            spriteRenderer.color = Color.Lerp(currentColor, targetColor, time);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
+    }
 }

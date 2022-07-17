@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Enemy
-  maxHp: 10
-  currentHp: 10
+  maxHp: 2
+  currentHp: 2
   dices:
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}

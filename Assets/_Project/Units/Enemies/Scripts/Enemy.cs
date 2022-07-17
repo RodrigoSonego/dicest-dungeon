@@ -41,4 +41,9 @@ public class Enemy : Unit, IPointerClickHandler
 
         return diceValue;
     }
+
+    public void FadeOut()
+    {
+        sprite.FadeOut();
+    }
 }

@@ -21,4 +21,9 @@ public class Player : Unit
     {
         movementController.DisableCollisionAndMovement();
     }
+
+    public void EnableCollisionAndMovement()
+    {
+        movementController.EnableCollisionAndMovement();
+    }
 }

@@ -85,24 +85,25 @@ public class BattleSystem : MonoBehaviour
         selectedEnemy.TakeDamage(damage);
         BattleUI.instance.OnDamageDealt(damage, selectedEnemy.transform.position);
 
-        print("player atacou o inimigo" + selectedEnemy.unitName + " com um "+ dice.diceName + " e deu " + damage + " de dano");
-        print(selectedEnemy.isDead ? "matou o bicho zé" : "n matou");
-
         BattleUI.instance.DisableDiceButtons();
         yield return new WaitForSeconds(1.5f);
 
         if(selectedEnemy.isDead)
         {
+
+            print(HaveAllEnemiesDied() ? "todo mundo morreu": "n morreu todo mundo");
             if (HaveAllEnemiesDied())
             {
                 currentState = BattleState.Won;
+                selectedEnemy.DisableOutline();
+
                 EndBattle();
                 yield break;
             }
 
             selectedEnemy.isSelectable = false;
             SelectNextEnemy();
-        } 
+        }
 
         currentState = BattleState.EnemyTurn;
         StartCoroutine(EnemyTurn());     
@@ -122,8 +123,6 @@ public class BattleSystem : MonoBehaviour
 
             playerUnit.TakeDamage(damage);
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
-
-            print("atacou o player e deu " + damage + " de dano");
 
             yield return new WaitForSeconds(1.5f);
 
@@ -146,12 +145,38 @@ public class BattleSystem : MonoBehaviour
     {
         if(currentState == BattleState.Won)
         {
-            print("gañaste");
+            BattleUI.instance.OnBattleStateChanged(currentState);
+
+            ClearScreen();
+            StartCoroutine(ReturnFromBattle());
         }
         else if (currentState == BattleState.Lost)
         {
             print("Congratulations! You're a failure");
         }
+    }
+
+    private void ClearScreen()
+    {
+        BattleUI.instance.OnBattleEnd();
+        ClearEnemies();
+    }
+
+    private void ClearEnemies()
+    {
+        foreach (var enemy in enemyUnits)
+        {
+            enemy.FadeOut();
+        }
+
+        enemyUnits = null;
+    }
+
+    IEnumerator ReturnFromBattle()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        playerUnit.EnableCollisionAndMovement();
     }
 
     public void SelectEnemy(Enemy enemy)
@@ -186,6 +211,8 @@ public class BattleSystem : MonoBehaviour
 
         return areAllDead;
     }
+
+    
 
     public void OnDiceClicked(Dice dice)
     {

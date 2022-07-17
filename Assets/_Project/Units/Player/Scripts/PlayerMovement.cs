@@ -33,4 +33,10 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.simulated = false;
         canMove = false;
     }
+
+    public void EnableCollisionAndMovement()
+    {
+        rigidBody.simulated = true;
+        canMove = true;
+    }
 }
