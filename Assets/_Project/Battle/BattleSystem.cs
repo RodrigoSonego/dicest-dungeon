@@ -9,7 +9,8 @@ public enum BattleState
     PlayerTurn,
     EnemyTurn,
     Won,
-    Lost
+    Lost,
+    None
 }
 
 public class BattleSystem : MonoBehaviour
@@ -33,17 +34,18 @@ public class BattleSystem : MonoBehaviour
        //StartCoroutine(StartBattle());
     }
 
-    public IEnumerator StartBattle()
+    public IEnumerator StartBattle(Enemy[] enemies)
     {
         currentState = BattleState.Start;
+        enemyUnits = enemies;
 
         BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.SetDiceButtons(playerUnit.dices);
-        BattleUI.instance.DisableDiceButtons();
-
-        SetEnemyClickListenersIfNeeded();
+        BattleUI.instance.OnBattleStart();
 
         yield return new WaitForSeconds(2);
+
+        SetEnemyClickListenersIfNeeded();
 
         currentState = BattleState.PlayerTurn;
         StartPlayerTurn();

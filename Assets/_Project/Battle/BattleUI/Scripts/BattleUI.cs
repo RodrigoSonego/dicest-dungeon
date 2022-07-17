@@ -22,8 +22,7 @@ public class BattleUI : MonoBehaviour
     {
         instance = this;
 
-        turnIndicator.gameObject.SetActive(false);
-        damageIndicator.enabled = false;
+        HideUI();
     }
 
     public void SetDiceButtons(List<Dice> dices)
@@ -90,7 +89,9 @@ public class BattleUI : MonoBehaviour
         Vector2 viewPortAttackerPos = Camera.main.WorldToScreenPoint(attackerPosition);
 
         turnIndicator.gameObject.SetActive(true);
-        turnIndicator.position = viewPortAttackerPos + TurnIndicatorOffset;
+        Vector2 newIndicatorPos = viewPortAttackerPos + TurnIndicatorOffset;
+
+        turnIndicator.transform.position = newIndicatorPos;
     }
 
     public void OnDamageDealt(int damage, Vector2 damagedUnitPosition)
@@ -114,4 +115,37 @@ public class BattleUI : MonoBehaviour
         damageIndicator.enabled = false;
     }
 
+    public void HideUI()
+    {
+        var graphics = GetComponentsInChildren<Graphic>();
+        foreach (var graphic in graphics)
+        {
+            graphic.enabled = false;
+        }
+    }
+
+    public void ShowUI()
+    {
+        var graphics = GetComponentsInChildren<Graphic>();
+        foreach (var graphic in graphics)
+        {
+            graphic.enabled = true;
+        }
+    }
+
+    public void OnBattleStart()
+    {
+        ShowUI();
+        damageIndicator.enabled = false;
+        turnIndicator.gameObject.SetActive(false);
+
+        SlideFromOffset(battleStateTitle.transform, new Vector3(0,100,0));
+    }
+
+    public void SlideFromOffset(Transform current, Vector3 offset)
+    {
+        Vector3 initialPos = current.position;
+        battleStateTitle.transform.position += offset;
+        StartCoroutine(LerpMovement.LerpToPosition(battleStateTitle.transform, initialPos, 2f));
+    }
 }

@@ -9,7 +9,7 @@ public class EnemySprite : MonoBehaviour
 
     private const string outlineEnableProperty = "_OutlineEnabled";
 
-    void Start()
+    void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
