@@ -12,6 +12,7 @@ public class Enemy : Unit, IPointerClickHandler
     public Action<Enemy> onEnemyClicked;
 
     [SerializeField] private Slider healthBar;
+    [SerializeField] private Animator animator;
 
     void OnEnable()
     {
@@ -53,6 +54,8 @@ public class Enemy : Unit, IPointerClickHandler
     {
         int randomIndex = UnityEngine.Random.Range(0, dices.Count - 1);
         int diceValue = dices[randomIndex].Roll();
+
+        animator.Play("attack");
 
         dices.RemoveAt(randomIndex);
 
