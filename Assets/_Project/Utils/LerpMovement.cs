@@ -28,7 +28,7 @@ public class LerpMovement : MonoBehaviour
 
         while (elapsedTime < time)
         {
-            graphic.color = Color.Lerp(currentColor, targetColor, time);
+            graphic.color = Color.Lerp(currentColor, targetColor, elapsedTime / time);
             elapsedTime += Time.deltaTime;
 
             yield return null;
@@ -45,7 +45,7 @@ public class LerpMovement : MonoBehaviour
 
         while (elapsedTime < time)
         {
-            spriteRenderer.color = Color.Lerp(currentColor, targetColor, time);
+            spriteRenderer.color = Color.Lerp(currentColor, targetColor, elapsedTime / time);
             elapsedTime += Time.deltaTime;
 
             yield return null;
