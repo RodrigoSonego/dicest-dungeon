@@ -1,6 +1,9 @@
+using UnityEngine;
+
 public class Player : Unit
 {
     private PlayerMovement movementController;
+    [SerializeField] private Animator animator;
 
     public static Player instance;
 
@@ -16,6 +19,8 @@ public class Player : Unit
 
         int diceValue = dice.Roll();
         dices.Remove(dice);
+
+        animator.Play("attack");
 
         return diceValue;
     }
@@ -33,5 +38,10 @@ public class Player : Unit
     public void FullyHeal()
     {
         currentHp = MaxHp;
+    }
+
+    public void SetAnimatorWalk(bool isWalking)
+    {
+        animator.SetBool("walking", isWalking);
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7646132346908145116}
   - component: {fileID: 7646132346908145117}
+  - component: {fileID: 8569911362307069019}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64a20d8f668a74f4bacda8139166c777, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8569911362307069019
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646132346908145106}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6ef14518df76d044a12166e0373e77d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8254629092461159845
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,14 +154,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Player
-  maxHp: 15
-  currentHp: 15
+  maxHp: 20
+  currentHp: 20
   attackAnimationWindUpTime: 0
   diceSpawnPosition: {fileID: 0}
   dices:
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
+  animator: {fileID: 8569911362307069019}
 --- !u!114 &7646132346986349418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  sprite: {fileID: 7646132346908145117}
 --- !u!50 &7646132346986349419
 Rigidbody2D:
   serializedVersion: 4
@@ -188,16 +211,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.0808063}
+  m_Offset: {x: 0, y: -1.0110724}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.33, y: 1.89}
+    newSize: {x: 1.33, y: 1.89}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9406536, y: 0.68425906}
+  m_Size: {x: 2.9406536, y: 2.2184086}
   m_EdgeRadius: 0
