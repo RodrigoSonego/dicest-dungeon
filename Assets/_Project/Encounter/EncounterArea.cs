@@ -8,16 +8,23 @@ public class EncounterArea : MonoBehaviour
     [SerializeField] private Transform playerBattlePosition;
     [SerializeField] private Transform[] enemyBattlePositions;
     [SerializeField] private Vector3 enemySpawnOffset;
+
+    private bool hasTriggered = false;
+
     private void TriggerBattle(Player player)
     {
         SetupPlayer(player);
 
         var enemies = SpawnAndPositionEnemies();
         StartCoroutine(BattleSystem.instance.StartBattle(enemies));
+
+        hasTriggered = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(hasTriggered) { return; }
+
         var player = collision.GetComponent<Player>();
         TriggerBattle(player);
     }

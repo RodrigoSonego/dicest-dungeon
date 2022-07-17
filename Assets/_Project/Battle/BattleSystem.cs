@@ -39,6 +39,8 @@ public class BattleSystem : MonoBehaviour
         currentState = BattleState.Start;
         enemyUnits = enemies;
 
+        PlayerCamera.instance.willFollow = false;
+
         BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.SetDiceButtons(playerUnit.dices);
         BattleUI.instance.OnBattleStart();
@@ -176,6 +178,7 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
+        PlayerCamera.instance.willFollow = true;
         playerUnit.EnableCollisionAndMovement();
     }
 

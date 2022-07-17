@@ -23,6 +23,9 @@ public class BattleUI : MonoBehaviour
     {
         instance = this;
 
+        battleStateTitle.transform.position += new Vector3(0, 100, 0);
+        diceButtonContainer.transform.position += new Vector3(0, -100, 0);
+
         HideUI();
     }
 
@@ -138,7 +141,8 @@ public class BattleUI : MonoBehaviour
         damageIndicator.enabled = false;
         turnIndicator.gameObject.SetActive(false);
 
-        SlideFromOffset(battleStateTitle.transform, new Vector3(0,100,0));
+        SlideToOffset(battleStateTitle.transform, new Vector3(0,-100,0));
+        SlideToOffset(diceButtonContainer.transform, new Vector3(0, 100, 0));
     }
 
     internal void OnBattleEnd()
