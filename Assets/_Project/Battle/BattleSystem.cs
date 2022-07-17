@@ -149,16 +149,17 @@ public class BattleSystem : MonoBehaviour
 
     private void EndBattle()
     {
+        BattleUI.instance.OnBattleStateChanged(currentState);
+        ClearScreen();
+        
         if(currentState == BattleState.Won)
         {
-            BattleUI.instance.OnBattleStateChanged(currentState);
-
-            ClearScreen();
+            playerUnit.dices.AddRange(diceReward);
             StartCoroutine(ReturnFromBattle());
         }
         else if (currentState == BattleState.Lost)
         {
-            print("Congratulations! You're a failure");
+            
         }
     }
 
@@ -184,7 +185,6 @@ public class BattleSystem : MonoBehaviour
 
         PlayerCamera.instance.willFollow = true;
         playerUnit.EnableCollisionAndMovement();
-        playerUnit.dices.AddRange(diceReward);
     }
 
     public void SelectEnemy(Enemy enemy)

@@ -2,8 +2,11 @@ public class Player : Unit
 {
     private PlayerMovement movementController;
 
-    void Start()
+    public static Player instance;
+
+    void OnEnable()
     {
+        instance = this;   
         movementController = GetComponent<PlayerMovement>();
     }
 

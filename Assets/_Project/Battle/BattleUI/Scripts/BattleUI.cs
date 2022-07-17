@@ -82,6 +82,7 @@ public class BattleUI : MonoBehaviour
                 break;
             case BattleState.Lost:
                 battleStateTitle.text = "You Lost";
+                RestartManager.instance.FadeInGameOverUI();
                 break;
             default:
                 break;
@@ -140,6 +141,7 @@ public class BattleUI : MonoBehaviour
         ShowUI();
         damageIndicator.enabled = false;
         turnIndicator.gameObject.SetActive(false);
+        DisableDiceButtons();
 
         SlideToOffset(battleStateTitle.transform, new Vector3(0,-100,0));
         SlideToOffset(diceButtonContainer.transform, new Vector3(0, 100, 0));

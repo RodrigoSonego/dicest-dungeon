@@ -27,6 +27,8 @@ public class EncounterArea : MonoBehaviour
 
         var player = collision.GetComponent<Player>();
         TriggerBattle(player);
+
+        RestartManager.instance.OnEncounterStart(this);
     }
 
     private void SetupPlayer(Player player)
@@ -50,5 +52,10 @@ public class EncounterArea : MonoBehaviour
         }
 
         return enemies;
+    }
+
+    public void Reset()
+    {
+        hasTriggered = false;
     }
 }

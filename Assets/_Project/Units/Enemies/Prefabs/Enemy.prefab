@@ -49,9 +49,11 @@ MonoBehaviour:
   unitName: Enemy
   maxHp: 2
   currentHp: 2
+  attackAnimationWindUpTime: 0
+  diceSpawnPosition: {fileID: 0}
   dices:
-  - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
-  - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
+  - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
+  - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
   isSelectable: 0
 --- !u!61 &2141761910086934314
 BoxCollider2D:
