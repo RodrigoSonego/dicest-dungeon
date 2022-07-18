@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Enemy
-  maxHp: 25
-  currentHp: 25
+  maxHp: 20
+  currentHp: 20
   attackAnimationWindUpTime: 0
   diceSpawnPosition: {fileID: 0}
   dices:

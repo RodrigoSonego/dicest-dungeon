@@ -57,8 +57,6 @@ public class Enemy : Unit, IPointerClickHandler
 
         animator.Play("attack");
 
-        dices.RemoveAt(randomIndex);
-
         return diceValue;
     }
 
