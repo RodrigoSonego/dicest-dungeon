@@ -23,6 +23,8 @@ public class DiceButton : MonoBehaviour
     {
         nameContainer.text = dice.diceName;
         this.dice = dice;
+
+        GetComponent<Image>().sprite = dice.uiSprite;
     }
 
     private void OnButtonClicked()

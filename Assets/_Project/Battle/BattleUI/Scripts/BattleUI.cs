@@ -43,6 +43,7 @@ public class BattleUI : MonoBehaviour
         {
             DiceButton button = Instantiate(diceButtonPrefab, diceButtonContainer);
             button.UpdateWithDice(dice);
+
         }
     }
 

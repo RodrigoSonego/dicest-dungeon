@@ -5,7 +5,7 @@ public class Dice : ScriptableObject
 {
     [SerializeField] public string diceName;
     [SerializeField] private int maxValue;
-    [SerializeField] private Sprite uiSprite;
+    [SerializeField] public Sprite uiSprite;
     [SerializeField] private Sprite RolledSprite;
 
     public int Roll()

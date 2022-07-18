@@ -16,5 +16,10 @@ MonoBehaviour:
   - {fileID: 2141761910086934312, guid: ab42c82b1f4ac1a48aac82f67fb6f0ca, type: 3}
   - {fileID: 2141761910086934312, guid: deb540f3cf6e6c1468dc1355ddc4c90c, type: 3}
   chipReward: 0
-  diceReward: []
+  diceReward:
+  - {fileID: 11400000, guid: f0f358feb25525a4ea97317939a14027, type: 2}
+  - {fileID: 11400000, guid: f5ff64bcd69dc0b4e9b135d9ef647ba6, type: 2}
+  - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
+  - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
+  - {fileID: 11400000, guid: f0f358feb25525a4ea97317939a14027, type: 2}
   isCompleted: 0

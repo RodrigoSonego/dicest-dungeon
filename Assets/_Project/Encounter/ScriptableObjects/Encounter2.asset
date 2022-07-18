@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70108e3ff7c0b2c44a1228c33ef34027, type: 3}
-  m_Name: D6
+  m_Script: {fileID: 11500000, guid: 3446c2cf9d1b75c4c895ba14de424b75, type: 3}
+  m_Name: Encounter2
   m_EditorClassIdentifier: 
-  diceName: D6
-  maxValue: 6
-  uiSprite: {fileID: 21300000, guid: 40f90828db94f864b90e60c184f559d5, type: 3}
-  RolledSprite: {fileID: 0}
+  enemies:
+  - {fileID: 2141761910086934312, guid: 616d324d8b219584aa4acc43b8ba9c44, type: 3}
+  chipReward: 0
+  diceReward: []
+  isCompleted: 0

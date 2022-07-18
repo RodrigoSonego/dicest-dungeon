@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Enemy
-  maxHp: 2
-  currentHp: 2
+  maxHp: 25
+  currentHp: 25
   attackAnimationWindUpTime: 0
   diceSpawnPosition: {fileID: 0}
   dices:
@@ -59,8 +59,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   isSelectable: 0
-  healthBar: {fileID: 0}
-  animator: {fileID: 0}
+  healthBar: {fileID: 6030915837783741755}
+  animator: {fileID: 4024744613132174259}
 --- !u!61 &2141761910086934314
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -159,8 +159,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1437960381
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4f4e5fffd0115c1488e2aed5abd51e9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -242,8 +242,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.55, y: 4.66}
-  m_SizeDelta: {x: 7.4792, y: 1.983}
+  m_AnchoredPosition: {x: 0.85, y: 4.27}
+  m_SizeDelta: {x: 6.2327, y: 1.6525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4169846140315777051
 Canvas:
@@ -263,7 +263,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1808974673
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7917096363637976005
@@ -415,6 +415,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7beeab06d385d704d9b41645f19f09a0, type: 3}
+--- !u!114 &6030915837783741755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5885104354401836006, guid: 7beeab06d385d704d9b41645f19f09a0, type: 3}
+  m_PrefabInstance: {fileID: 152569584696250077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8980873724895161991 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9132297476170752090, guid: 7beeab06d385d704d9b41645f19f09a0, type: 3}
