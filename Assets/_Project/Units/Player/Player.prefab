@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1437960381
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 64a20d8f668a74f4bacda8139166c777, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -161,6 +161,8 @@ MonoBehaviour:
   dices:
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
+  - {fileID: 11400000, guid: f0f358feb25525a4ea97317939a14027, type: 2}
+  - {fileID: 11400000, guid: f5ff64bcd69dc0b4e9b135d9ef647ba6, type: 2}
   - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
   animator: {fileID: 8569911362307069019}
 --- !u!114 &7646132346986349418
@@ -185,14 +187,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8254629092461159845}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
