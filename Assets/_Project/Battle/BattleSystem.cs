@@ -50,6 +50,7 @@ public class BattleSystem : MonoBehaviour
         BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.SetDiceButtons(playerUnit.dices);
         BattleUI.instance.OnBattleStart();
+        BattleUI.instance.SetPlayerHealthBarValue(playerUnit.CurrentHp);
 
         yield return new WaitForSeconds(2);
 
@@ -78,6 +79,7 @@ public class BattleSystem : MonoBehaviour
         BattleUI.instance.OnBattleStateChanged(currentState);
         BattleUI.instance.EnableDiceButtons();
         BattleUI.instance.OnAttackerChanged(playerUnit.transform.position);
+        selectedEnemy.EnableOutline();
     }
 
     IEnumerator PlayerAttack(Dice dice)
@@ -115,12 +117,13 @@ public class BattleSystem : MonoBehaviour
         }
 
         currentState = BattleState.EnemyTurn;
-        StartCoroutine(EnemyTurn());     
+        StartCoroutine(EnemyTurn());
     }
 
     private IEnumerator EnemyTurn()
     {
         BattleUI.instance.OnBattleStateChanged(currentState);
+        selectedEnemy.DisableOutline();
 
         foreach (Enemy enemy in enemyUnits)
         {
