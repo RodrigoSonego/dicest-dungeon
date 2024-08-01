@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000076294, y: -81}
-  m_SizeDelta: {x: 321.1761, y: 50}
+  m_AnchoredPosition: {x: -0.0000076294, y: -66.3}
+  m_SizeDelta: {x: 327.4977, y: 106.8961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4759451581250747039
 CanvasRenderer:
@@ -193,7 +193,9 @@ MonoBehaviour:
   diceButtonContainer: {fileID: 4759451581565964726}
   diceButtonPrefab: {fileID: 1213762384030467266, guid: 2d3c9a3e1bcee3a4ba641fbe6d8e0d03, type: 3}
   battleStateTitle: {fileID: 4759451581250747036}
-  turnIndicator: {fileID: 8871668459006039364}
+  turnIndicatorPivot: {fileID: 8871668459006039364}
+  turnLabel: {fileID: 4759451582655719906}
+  turnArrow: {fileID: 3079932609350888105}
   TurnIndicatorOffset: {x: 0, y: 150}
   damageIndicator: {fileID: 4759451582091285652}
 --- !u!1 &4759451581565964727

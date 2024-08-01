@@ -17,7 +17,9 @@ public class BattleUI : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI battleStateTitle;
     [Space]
-    [SerializeField] private RectTransform turnIndicator;
+    [SerializeField] private RectTransform turnIndicatorPivot;
+    [SerializeField] private Graphic turnLabel;
+    [SerializeField] private Graphic turnArrow;
     [SerializeField] private Vector2 TurnIndicatorOffset;
     [Space]
     [SerializeField] private TextMeshProUGUI damageIndicator;
@@ -117,8 +119,8 @@ public class BattleUI : MonoBehaviour
 
         Vector2 newIndicatorPos = viewPortAttackerPos + TurnIndicatorOffset;
 
-        turnIndicator.gameObject.SetActive(true);
-        turnIndicator.transform.position = newIndicatorPos;
+        turnIndicatorPivot.gameObject.SetActive(true);
+        turnIndicatorPivot.transform.position = newIndicatorPos;
     }
 
     public void OnDamageDealt(int damage, Vector2 damagedUnitPosition)
@@ -156,13 +158,16 @@ public class BattleUI : MonoBehaviour
         {
             graphic.enabled = true;
         }
+
+        ResetGraphicOpacity(turnLabel);
+        ResetGraphicOpacity(turnArrow);
     }
 
     public void OnBattleStart()
     {
         ShowUI();
         damageIndicator.enabled = false;
-        turnIndicator.gameObject.SetActive(false);
+        turnIndicatorPivot.gameObject.SetActive(false);
         DisableDiceButtons();
 
         SlideToOffset(battleStateTitle.transform, new Vector3(0,-100,0));
@@ -173,8 +178,9 @@ public class BattleUI : MonoBehaviour
     {
         SlideToOffset(battleStateTitle.transform, new Vector3(0, 100, 0));
         SlideToOffset(lowerPanel.transform, new Vector3(0, -200, 0));
-        FadeOut(turnIndicator.GetComponent<Graphic>());
-    }
+        FadeOut(turnLabel);
+		FadeOut(turnArrow);
+	}
 
     public void SlideFromOffset(Transform current, Vector3 offset)
     {
@@ -193,5 +199,10 @@ public class BattleUI : MonoBehaviour
     private void FadeOut(Graphic graphic)
     {
         StartCoroutine(LerpMovement.LerpOpacity(graphic, 0, 1.5f));
+    }
+
+    private void ResetGraphicOpacity(Graphic graphic)
+    {
+        graphic.color = new(graphic.color.r, graphic.color.g, graphic.color.b, 1);
     }
 }
