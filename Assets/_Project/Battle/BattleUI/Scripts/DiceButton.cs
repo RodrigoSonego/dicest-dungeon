@@ -21,7 +21,6 @@ public class DiceButton : MonoBehaviour
 
     public void UpdateWithDice(Dice dice)
     {
-        nameContainer.text = dice.diceName;
         this.dice = dice;
 
         GetComponent<Image>().sprite = dice.uiSprite;
