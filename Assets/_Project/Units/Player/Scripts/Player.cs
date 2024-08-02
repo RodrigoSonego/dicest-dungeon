@@ -18,6 +18,12 @@ public class Player : Unit
         if(dices.Contains(dice) == false) { print("não tem o dado"); return -1; }
 
         int diceValue = dice.Roll();
+
+        if (diceValue == 1)
+        {
+            diceValue = dice.Roll();
+        }
+
         dices.Remove(dice);
 
         animator.Play("attack");
