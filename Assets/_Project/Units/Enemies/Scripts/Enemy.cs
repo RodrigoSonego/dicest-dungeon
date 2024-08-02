@@ -50,14 +50,16 @@ public class Enemy : Unit, IPointerClickHandler
         sprite.EnableOutline();
     }
 
-    public int RollDice()
+    public (int, Dice) RollDice()
     {
         int randomIndex = UnityEngine.Random.Range(0, dices.Count - 1);
-        int diceValue = dices[randomIndex].Roll();
+        Dice dice = dices[randomIndex];
+		
+        int diceValue = dice.Roll();
 
         animator.Play("attack");
 
-        return diceValue;
+        return (diceValue, dice);
     }
 
     public void FadeOut()

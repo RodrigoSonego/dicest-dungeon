@@ -15,4 +15,4 @@ MonoBehaviour:
   diceName: D6
   maxValue: 6
   uiSprite: {fileID: 21300000, guid: 40f90828db94f864b90e60c184f559d5, type: 3}
-  RolledSprite: {fileID: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum BattleState
 {
@@ -94,8 +95,7 @@ public class BattleSystem : MonoBehaviour
         int damage = playerUnit.RollDice(dice);
         lastUsedDices.Add(dice);
 
-        thrownDice.FlipSprite(false);
-        yield return StartCoroutine(thrownDice.LerpDiceTo(playerUnit.diceSpawnPosition, selectedEnemy.transform, diceThrowLength));
+        yield return StartCoroutine(ThrowDie(playerUnit.diceSpawnPosition, selectedEnemy.transform, dice.color, willFlip: false, playerUnit.attackAnimationWindUpTime));
 
 		selectedEnemy.TakeDamage(damage);
         BattleUI.instance.OnDamageDealt(damage, selectedEnemy.transform.position);
@@ -133,11 +133,9 @@ public class BattleSystem : MonoBehaviour
 
             BattleUI.instance.OnAttackerChanged(enemy.transform.position);
 
-            int damage = enemy.RollDice();
+            (int damage, Dice dice) = enemy.RollDice();
 
-            yield return new WaitForSeconds(enemy.attackAnimationWindUpTime);
-            thrownDice.FlipSprite(true);
-            yield return StartCoroutine(thrownDice.LerpDiceTo(enemy.diceSpawnPosition, playerUnit.transform, diceThrowLength));
+            yield return StartCoroutine(ThrowDie(enemy.diceSpawnPosition, playerUnit.transform, dice.color, willFlip: true, enemy.attackAnimationWindUpTime));
 
             playerUnit.TakeDamage(damage);
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
@@ -243,4 +241,12 @@ public class BattleSystem : MonoBehaviour
 
         StartCoroutine(PlayerAttack(dice));
     }
+
+    private IEnumerator ThrowDie(Transform origin, Transform target, Color color, bool willFlip, float animWindUp)
+    {
+		yield return new WaitForSeconds(animWindUp);
+		thrownDice.ChangeColor(color);
+		thrownDice.FlipSprite(true);
+		yield return StartCoroutine(thrownDice.LerpDiceTo(origin, target, diceThrowLength));
+	}
 }

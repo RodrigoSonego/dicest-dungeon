@@ -25,4 +25,9 @@ public class ThrownDice : MonoBehaviour
     {
         sprite.flipX = flip;
     }
+
+    public void ChangeColor(Color color)
+    {
+        sprite.color = color;
+    }
 }
