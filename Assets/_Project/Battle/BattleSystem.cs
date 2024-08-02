@@ -18,7 +18,8 @@ public class BattleSystem : MonoBehaviour
     // serializing for debugging only
     [SerializeField] private BattleState currentState;
 
-    [SerializeField] private Dice debugDiceLmao;
+    [SerializeField] private ThrownDice thrownDice;
+    [SerializeField] private float diceThrowLength;
 
     [SerializeField] private Enemy[] enemyUnits;
     [SerializeField] private Player playerUnit;
@@ -34,7 +35,7 @@ public class BattleSystem : MonoBehaviour
     {
        instance = this;
 
-       //StartCoroutine(StartBattle());
+        thrownDice.gameObject.SetActive(false);
     }
 
     public IEnumerator StartBattle(Enemy[] enemies, Dice[] diceReward)
@@ -93,7 +94,10 @@ public class BattleSystem : MonoBehaviour
         int damage = playerUnit.RollDice(dice);
         lastUsedDices.Add(dice);
 
-        selectedEnemy.TakeDamage(damage);
+        thrownDice.FlipSprite(false);
+        yield return StartCoroutine(thrownDice.LerpDiceTo(playerUnit.diceSpawnPosition, selectedEnemy.transform, diceThrowLength));
+
+		selectedEnemy.TakeDamage(damage);
         BattleUI.instance.OnDamageDealt(damage, selectedEnemy.transform.position);
 
         BattleUI.instance.DisableDiceButtons();
@@ -101,8 +105,6 @@ public class BattleSystem : MonoBehaviour
 
         if(selectedEnemy.isDead)
         {
-
-            print(HaveAllEnemiesDied() ? "todo mundo morreu": "n morreu todo mundo");
             if (HaveAllEnemiesDied())
             {
                 currentState = BattleState.Won;
@@ -132,6 +134,10 @@ public class BattleSystem : MonoBehaviour
             BattleUI.instance.OnAttackerChanged(enemy.transform.position);
 
             int damage = enemy.RollDice();
+
+            yield return new WaitForSeconds(enemy.attackAnimationWindUpTime);
+            thrownDice.FlipSprite(true);
+            yield return StartCoroutine(thrownDice.LerpDiceTo(enemy.diceSpawnPosition, playerUnit.transform, diceThrowLength));
 
             playerUnit.TakeDamage(damage);
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);

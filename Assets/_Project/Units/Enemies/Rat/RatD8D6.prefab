@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2141761910682441246}
+  - {fileID: 2338772292428783865}
   - {fileID: 6340629988428434431}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,7 +52,7 @@ MonoBehaviour:
   maxHp: 2
   currentHp: 2
   attackAnimationWindUpTime: 0
-  diceSpawnPosition: {fileID: 0}
+  diceSpawnPosition: {fileID: 2338772292428783865}
   dices:
   - {fileID: 11400000, guid: f0f358feb25525a4ea97317939a14027, type: 2}
   - {fileID: 11400000, guid: e26feaabf180d7644a5e5152ba345739, type: 2}
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &5312175054605121547
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -202,7 +203,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2373155086214415107
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +238,7 @@ RectTransform:
   m_Children:
   - {fileID: 2637778401363610808}
   m_Father: {fileID: 3590390900481657528}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -304,6 +306,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &3595246593801122319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2338772292428783865}
+  m_Layer: 6
+  m_Name: DiceSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2338772292428783865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595246593801122319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.109, y: -0.129, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3590390900481657528}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6496219607016369378
 PrefabInstance:
   m_ObjectHideFlags: 0
