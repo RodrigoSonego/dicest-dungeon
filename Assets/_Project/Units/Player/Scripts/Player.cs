@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : Unit
 {
     private PlayerMovement movementController;
     [SerializeField] private Animator animator;
+    [SerializeField] private float fadeOutTime;
 
     public static Player instance;
 
@@ -49,5 +51,12 @@ public class Player : Unit
     public void SetAnimatorWalk(bool isWalking)
     {
         animator.SetBool("walking", isWalking);
+    }
+
+    public IEnumerator FadeOut()
+    {
+        SpriteRenderer sprite = animator.GetComponent<SpriteRenderer>();
+
+        yield return StartCoroutine(LerpMovement.LerpOpacity(sprite, 0, fadeOutTime));
     }
 }

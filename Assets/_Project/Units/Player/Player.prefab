@@ -198,6 +198,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5ff64bcd69dc0b4e9b135d9ef647ba6, type: 2}
   - {fileID: 11400000, guid: eba25e1f4a84a574b8e184f7e6636a0c, type: 2}
   animator: {fileID: 8569911362307069019}
+  fadeOutTime: 2
 --- !u!114 &7646132346986349418
 MonoBehaviour:
   m_ObjectHideFlags: 0

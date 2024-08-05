@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public enum BattleState
 {
@@ -141,17 +140,18 @@ public class BattleSystem : MonoBehaviour
             BattleUI.instance.OnDamageDealt(damage, playerUnit.transform.position);
             BattleUI.instance.SetPlayerHealthBarValue(playerUnit.CurrentHp);
 
-            yield return new WaitForSeconds(enemy.attackAnimationWindUpTime);
+			if (playerUnit.isDead)
+			{
+				currentState = BattleState.Lost;
 
-            yield return new WaitForSeconds(2f);
+                yield return StartCoroutine(playerUnit.FadeOut());
 
-            if(playerUnit.isDead)
-            {
-                currentState = BattleState.Lost;
-                EndBattle();
+				EndBattle();
 
-                yield break;
-            }
+				yield break;
+			}
+
+			yield return new WaitForSeconds(2f);
 
         }
         
@@ -246,7 +246,7 @@ public class BattleSystem : MonoBehaviour
     {
 		yield return new WaitForSeconds(animWindUp);
 		thrownDice.ChangeColor(color);
-		thrownDice.FlipSprite(true);
+		thrownDice.FlipSprite(willFlip);
 		yield return StartCoroutine(thrownDice.LerpDiceTo(origin, target, diceThrowLength));
 	}
 }
