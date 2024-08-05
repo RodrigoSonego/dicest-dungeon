@@ -6,7 +6,7 @@ public class ThrownDice : MonoBehaviour
 {
     private SpriteRenderer sprite;
 
-	private void Start()
+	private void OnEnable()
 	{
 		sprite = GetComponent<SpriteRenderer>();
 	}
